@@ -9,7 +9,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Verify JSON File Exists
+        run: ls -R $GITHUB_WORKSPACE/2-SoftwareDesign/2.5-GitHubActions/
+
       - name: Start JSON Linter
         run: | 
           npm i -g @prantlf/jsonlint
-          jsonlint $GITHUB_WORKSPACE/.github/workflows/JSON_DetailedDataSchema_Example.json
+          jsonlint $GITHUB_WORKSPACE/2-SoftwareDesign/2.5-GitHubActions/JSON_DetailedDataSchema_Example.json
