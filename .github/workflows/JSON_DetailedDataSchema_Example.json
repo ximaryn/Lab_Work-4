@@ -43,7 +43,7 @@
           "minimum": 1
         },
         "mood_level": {
-          "type": "string",
+          "type": "integer",
           "description": "Рівень настрою від 1 до 10",
           "minimum": 1,
           "maximum": 10
