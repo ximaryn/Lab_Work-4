@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Health Monitoring System Data Schema",
+  "description": "A JSON schema for a health monitoring system including user data, health metrics, air quality, location, recommendations, and system data.",
+  "type": "object",
+  "properties": {
+    "User": {
+      "type": "object",
+      "description": "Деталі користувача",
+      "required": ["user_id", "name", "email", "birth_date"],
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор для користувача",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Ім'я користувача",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Електронна пошта користувача",
+          "format": "email"
+        },
+        "birth_date": {
+          "type": "string",
+          "description": "Дата народження користувача",
+          "format": "date"
+        }
+      }
+    },
+    "PhysicalHealthMetrics": {
+      "type": "object",
+      "description": "Показники для моніторингу фізичного здоров'я користувача",
+      "required": ["metrics_id", "heart_rate", "blood_pressure", "steps_count", "activity_level", "user_id", "system_id"],
+      "properties": {
+        "metrics_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор для показників здоров'я",
+          "minimum": 1
+        },
+        "heart_rate": {
+          "type": "number",
+          "description": "Частота серцевих скорочень користувача у хвилину",
+          "minimum": 1
+        },
+        "blood_pressure": {
+          "type": "string",
+          "description": "Артеріальний тиск у форматі '120/80'",
+          "pattern": "^\\d{2,3}/\\d{2,3}$"
+        },
+        "steps_count": {
+          "type": "integer",
+          "description": "Кількість кроків, які зробив користувач",
+          "minimum": 1
+        },
+        "activity_level": {
+          "type": "string",
+          "description": "Рівень фізичної активності користувача",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "Ідентифікатор користувача, що посилається на сутність User",
+          "minimum": 1
+        },
+        "system_id": {
+          "type": "integer",
+          "description": "Ідентифікатор системи, що посилається на сутність System",
+          "minimum": 1
+        }
+      }
+    },
+    "Recommendation": {
+      "type": "object",
+      "description": "Рекомендації, створені системою",
+      "required": ["recommendation_id", "text", "creation_date", "system_id"],
+      "properties": {
+        "recommendation_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор рекомендації",
+          "minimum": 1
+        },
+        "text": {
+          "type": "string",
+          "description": "Зміст рекомендації",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "creation_date": {
+          "type": "string",
+          "description": "Дата створення рекомендації",
+          "format": "date"
+        },
+        "system_id": {
+          "type": "integer",
+          "description": "Ідентифікатор системи, що посилається на сутність System",
+          "minimum": 1
+        }
+      }
+    },
+    "AirQuality": {
+      "type": "object",
+      "description": "Дані моніторингу якості повітря",
+      "required": ["air_quality_id", "CO2_level", "dust_level", "other_pollutants", "location_id", "system_id"],
+      "properties": {
+        "air_quality_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор даних про якість повітря",
+          "minimum": 1
+        },
+        "CO2_level": {
+          "type": "number",
+          "description": "Рівень CO2 у ppm",
+          "minimum": 0
+        },
+        "dust_level": {
+          "type": "number",
+          "description": "Рівень пилу в мікрограмах на кубічний метр",
+          "minimum": 0
+        },
+        "other_pollutants": {
+          "type": "string",
+          "description": "Інформація про інші забруднювачі",
+          "minLength": 0,
+          "maxLength": 200
+        },
+        "location_id": {
+          "type": "integer",
+          "description": "Ідентифікатор локації, що посилається на сутність Location",
+          "minimum": 1
+        },
+        "system_id": {
+          "type": "integer",
+          "description": "Ідентифікатор системи, що посилається на сутність System",
+          "minimum": 1
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "Географічні дані про місцезнаходження",
+      "required": ["location_id", "latitude", "longitude", "user_id"],
+      "properties": {
+        "location_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор для місцезнаходження",
+          "minimum": 1
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Широта місцезнаходження",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Довгота місцезнаходження",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "Ідентифікатор користувача, що посилається на сутність User",
+          "minimum": 1
+        }
+      }
+    },
+    "System": {
+      "type": "object",
+      "description": "Інформація про систему",
+      "required": ["system_id", "name", "version"],
+      "properties": {
+        "system_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор системи",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Назва системи",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "version": {
+          "type": "string",
+          "description": "Версія системи",
+          "pattern": "^\\d+\\.\\d+$"
+        }
+      }
+    }
+  }
+}
