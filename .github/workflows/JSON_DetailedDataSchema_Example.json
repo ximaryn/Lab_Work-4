@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Health Monitoring System Data Schema",
+  "description": "JSON schema for health monitoring system data",
+  "type": "object",
+  "properties": {
+    "User": {
+      "type": "object",
+      "description": "Інформація про користувача",
+      "required": ["user_id", "username", "password", "email"],
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор користувача",
+          "minimum": 1
+        },
+        "username": {
+          "type": "string",
+          "description": "Ім'я користувача",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "password": {
+          "type": "string",
+          "description": "Пароль користувача",
+          "minLength": 8
+        },
+        "email": {
+          "type": "string",
+          "description": "Електронна пошта",
+          "format": "email"
+        }
+      }
+    },
+    "MoodTracking": {
+      "type": "object",
+      "description": "Записи про відстеження настрою",
+      "required": ["mood_id", "mood_level", "timestamp", "user_id"],
+      "properties": {
+        "mood_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор запису про настрій",
+          "minimum": 1
+        },
+        "mood_level": {
+          "type": "integer",
+          "description": "Рівень настрою від 1 до 10",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Дата і час запису",
+          "format": "date-time"
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "Ідентифікатор користувача, який створив запис",
+          "minimum": 1
+        }
+      }
+    },
+    "Recommendation": {
+      "type": "object",
+      "description": "Рекомендації, створені системою",
+      "required": ["recommendation_id", "content", "date_created", "system_id"],
+      "properties": {
+        "recommendation_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор рекомендації",
+          "minimum": 1
+        },
+        "content": {
+          "type": "string",
+          "description": "Зміст рекомендації",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "date_created": {
+          "type": "string",
+          "description": "Дата створення рекомендації",
+          "format": "date"
+        },
+        "system_id": {
+          "type": "integer",
+          "description": "Ідентифікатор системи, яка створила рекомендацію",
+          "minimum": 1
+        }
+      }
+    },
+    "Device": {
+      "type": "object",
+      "description": "Інформація про пристрій",
+      "required": ["device_id", "name", "type", "user_id"],
+      "properties": {
+        "device_id": {
+          "type": "integer",
+          "description": "Унікальний ідентифікатор пристрою",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Назва пристрою",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип пристрою",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "Ідентифікатор користувача, який володіє пристроєм",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}
