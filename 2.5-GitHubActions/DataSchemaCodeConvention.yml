@@ -12,4 +12,4 @@ jobs:
       - name: Start JSON Linter
         run: | 
           npm i -g @prantlf/jsonlint
-          jsonlint $GITHUB_WORKSPACE/.github/Lab_Work-4/2.5-GitHubActions/JSON_DetailedDataSchema_Example.json
+          jsonlint $GITHUB_WORKSPACE/.github/workflows/JSON_DetailedDataSchema_Example.json
